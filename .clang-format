@@ -1,0 +1,49 @@
+---
+Language: C
+# Use LLVM as base, then override heavily for Kernel style
+BasedOnStyle: LLVM
+
+# 1. 8-Character Hard Tabs (Kernel Rule #1)
+UseTab: Always
+TabWidth: 8
+IndentWidth: 8
+ContinuationIndentWidth: 8
+
+# 2. Line Limits
+# Historically 80. The modern Linux kernel recently updated this to 100.
+# Change to 100 if you prefer the modern standard.
+ColumnLimit: 80
+
+# 3. K&R Brace Style (1TBS)
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterFunction: true          # Forces: void create_socket() \n {
+  AfterControlStatement: false # Forces: if (...) {
+  AfterEnum: false             # Forces: enum foo {
+  AfterStruct: false           # Forces: struct foo {
+  AfterUnion: false
+  BeforeElse: false            # Forces: } else {
+  SplitEmptyFunction: true
+
+# 4. Strict Inline Prevention (Fixes your previous collapsing issue)
+AllowShortIfStatementsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: None
+AllowShortBlocksOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+
+# 5. Switch & Case Alignment (Kernel Rule)
+IndentCaseLabels: false        # switch and case must share the same column
+
+# 6. Pointers and Spacing
+PointerAlignment: Right        # char *foo (Right), NEVER char* foo (Left)
+SpaceAfterCStyleCast: false    # (int)x, NOT (int) x
+SpacesInParentheses: false     # if (x), NOT if ( x )
+SpaceBeforeParens: ControlStatements # if (x) vs my_func(x)
+SpaceBeforeAssignmentOperators: true
+
+# 7. Alignment of assignments and macros
+AlignConsecutiveAssignments: false
+AlignConsecutiveMacros: true
+AlignEscapedNewlines: Left
+AlignOperands: true
+...
